@@ -19,18 +19,16 @@ print(pokemon)
 
 
 def validemail(email,password):
+    email.strip
+    password.strip
     if "@" not in email:
         return "Error: Invalid Email format"
-    for i in password:
-        password =+1
-    8 > password 
-    password = True
-    if password > 8 :
-     return "password is invalid"
-    for i in password 
-    if password = int 
-    
-
+    if len(password) <= 8:
+       return "Your password must be 8 digits long"
+    for i in password
+     if i
+      
+        
 
 validemail()
     
