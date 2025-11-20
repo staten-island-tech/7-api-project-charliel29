@@ -18,19 +18,20 @@ print(pokemon)
  """
 
 
-def validemail(email,password):
-    email.strip
-    password.strip
+def createaccount(email,password):
+    if not isinstance(password, str) or not isinstance(email, str):
+         return "Error: Password and email must be a string."
     if "@" not in email:
         return "Error: Invalid Email format"
-    if len(password) <= 8:
+    if len(password) < 8:
        return "Your password must be 8 digits long"
-    for i in password
-     if i
-      
-        
-
-validemail()
+    if not any(ch.isdigit() for ch in password):
+        return "Error: Password must include at least one number."
+    if not any(ch.isupper() for ch in password):
+        return "Error: Password must include at least one uppercase letter."
+    else:
+        return(f"Your account has been created. This is your email: {email} and password: {password}.")
+print (createaccount("charlie@gmail.com", "Testing1" ))
     
 
       
