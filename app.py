@@ -1,5 +1,5 @@
 import requests
-import tkinter
+import tkinter as tk
 
 
 def amiibo():
@@ -20,13 +20,78 @@ def amiibo():
 
 window = tk.Tk()
 window.title("amiibo search") 
-window.geometry("400x250") 
+window.geometry("800x500") 
 window.resizable(False, False)
-prompt = tk.Label(window, text="Type what you want to find on ambiibo below",
-font=("Arial", 14))
+prompt = tk.Label(window, text="What you want to find on ambiibo?",
+font=("Arial", 16))
 prompt.pack(pady=10)
-entry = tk.Entry(window, font=("Arial", 14), width=30)
-entry.pack(pady=5)
 result_label = tk.Label(window, text="", font=("Arial", 14, "bold"),
 fg="blue")
 result_label.pack(pady=15)
+search_entry = tk.Entry (window,font=("Arial", 14),width=30,)
+search_entry.pack(pady=10,)
+tk.Button(
+    window
+    text="Submit",
+    command=on_click,
+    width=15,
+    height=2,
+    bg="lightblue",
+    fg="black"
+).pack()
+
+window.mainloop()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
