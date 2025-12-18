@@ -3,18 +3,16 @@ import tkinter as tk
 
 
 def amiibo():
-    response = requests.get(f"https://www.amiiboapi.com/api/")
+    y=search_entry.get
+    response = requests.get(f"https://www.amiiboapi.com/api/{y}")
     if response.status_code!=200:
         print("Error fetching data!")
         return None
     data=response.json()
     return{
-
-        "amiiboSeries" : data["amiiboSeries"],
         "character": data["character"],
 		"gameSeries": data["gameSeries"],
 		"type": data["type"],
-        "image": data["image"],
     }
 
 
@@ -30,17 +28,12 @@ fg="blue")
 result_label.pack(pady=15)
 search_entry = tk.Entry (window,font=("Arial", 14),width=30,)
 search_entry.pack(pady=10,)
-tk.Button(
-    window
-    text="Submit",
-    command=on_click,
-    width=15,
-    height=2,
-    bg="lightblue",
-    fg="black"
-).pack()
-
+button = tk.Button(
+window,text="Search",
+width=15, height= 2,command=amiibo)
+button.pack(pady=10)
 window.mainloop()
+
 
 
 
