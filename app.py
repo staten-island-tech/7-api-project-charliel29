@@ -2,52 +2,78 @@ import requests
 import tkinter as tk
 
 
-def Fruit():
-    y=search_entry.get()
-    response = requests.get(f"https://www.fruityvice.com/api/fruit/{y}")
-    if response.status_code!=200:
-        print("Error fetching data!")
-        return None
-    data=response.json()
-    return{
-        "protein": data["nutritions"]["protein"],
-        "sugar": data["nutritions"]["sugar"],
-        "calories": data["nutritions"]['calories'],
-        "fat": data["nutritions"]["fat"]
-        }
-    
-result_label.comfig(text=data)
+def search_fruit():
+    fruit_name = search_entry.get().lower()
+
+    if fruit_name == "":
+        result_label.config(text="Please enter a fruit name.")
+        return
+
+    try:
+        response = requests.get(
+            f"https://www.fruityvice.com/api/fruit/{fruit_name}"
+        )
+
+        if response.status_code != 200:
+            result_label.config(text="Fruit not found ❌")
+            return
+
+        data = response.json()
+        nutrition = data["nutritions"]
+
+        result_text = (
+            f"Fruit: {data['name']}\n"
+            f"Calories: {nutrition['calories']}\n"
+            f"Protein: {nutrition['protein']} g\n"
+            f"Sugar: {nutrition['sugar']} g\n"
+            f"Fat: {nutrition['fat']} g"
+        )
+
+        result_label.config(text=result_text)
+
+    except requests.exceptions.RequestException:
+        result_label.config(text="Error connecting to the API.")
+
+
+
 window = tk.Tk()
-window.title("Fruit search") 
-window.geometry("800x500") 
+window.title("Fruit Search")
+window.geometry("400x350")
 window.resizable(False, False)
-prompt = tk.Label(window, text="What fruit would you like to search up?",
-font=("Arial", 16))
-prompt.pack(pady=10)
-result_label = tk.Label(window, text="", font=("Arial", 14, "bold"),
-fg="blue")
+
+title = tk.Label(
+    window,
+    text="Fruit Nutrition Search",
+    font=("Arial", 16, "bold")
+)
+title.pack(pady=10)
+
+search_entry = tk.Entry(
+    window,
+    font=("Arial", 14),
+    width=25
+)
+search_entry.pack(pady=10)
+
+search_button = tk.Button(
+    window,
+    text="Search",
+    font=("Arial", 12),
+    width=12,
+    command=search_fruit
+)
+search_button.pack(pady=10)
+
+result_label = tk.Label(
+    window,
+    text="",
+    font=("Arial", 12),
+    fg="blue",
+    justify="left"
+)
 result_label.pack(pady=15)
-search_entry = tk.Entry (window,font=("Arial", 14),width=30,)
-search_entry.pack(pady=10,)
-button = tk.Button(
-window,text="Search",
-width=15, height= 2,command=Fruit)
-button.pack(pady=10)
+
 window.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
