@@ -1,3 +1,4 @@
+
 import requests
 import tkinter as tk
 
@@ -15,7 +16,7 @@ def search_fruit():
         )
 
         if response.status_code != 200:
-            result_label.config(text="Fruit not found ❌")
+            result_label.config(text="Fruit not found")
             return
 
         data = response.json()
@@ -74,21 +75,6 @@ result_label = tk.Label(
 result_label.pack(pady=15)
 
 window.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
